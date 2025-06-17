@@ -1,5 +1,5 @@
 export default function Home() {
   return (
-    <div className="">AI APP</div>
+    <div className="">AI ASSISTANT APP</div>
   );
 }

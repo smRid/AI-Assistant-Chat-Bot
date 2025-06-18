@@ -1,0 +1,471 @@
+type Chat_sessions {
+  chatbot_id: Int
+  chatbots: Chatbots
+    @materializer(query: "chatbotsUsingChat_sessions_chatbot_id_fkey")
+  created_at: DateTime!
+  guest_id: Int
+  guests: Guests @materializer(query: "guestsUsingChat_sessions_guest_id_fkey")
+  id: Int!
+  messages: [Messages]
+    @materializer(query: "messagesUsingMessages_chat_session_id_fkey")
+}
+
+type Chatbot_characteristics {
+  chatbot_id: Int
+  chatbots: Chatbots
+    @materializer(query: "chatbotsUsingChatbot_characteristics_chatbot_id_fkey")
+  content: String!
+  created_at: DateTime!
+  id: Int!
+}
+
+type Chatbots {
+  chat_sessions: [Chat_sessions]
+    @materializer(query: "chat_sessionsUsingChat_sessions_chatbot_id_fkey")
+  chatbot_characteristics: [Chatbot_characteristics]
+    @materializer(
+      query: "chatbot_characteristicsUsingChatbot_characteristics_chatbot_id_fkey"
+    )
+  clerk_user_id: String!
+  created_at: DateTime!
+  id: Int!
+  name: String!
+}
+
+type Guests {
+  chat_sessions: [Chat_sessions]
+    @materializer(query: "chat_sessionsUsingChat_sessions_guest_id_fkey")
+  created_at: DateTime!
+  email: String
+  id: Int!
+  name: String
+}
+
+type Messages {
+  chat_session_id: Int
+  chat_sessions: Chat_sessions
+    @materializer(query: "chat_sessionsUsingMessages_chat_session_id_fkey")
+  content: String!
+  created_at: DateTime!
+  id: Int!
+  sender: String!
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Chat_sessions' "
+  chat_sessions(id: Int!): Chat_sessions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chat_sessions"
+      configuration: "postgresql_config"
+    )
+  chat_sessionsList: [Chat_sessions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chat_sessions"
+      configuration: "postgresql_config"
+    )
+  chat_sessionsPaginatedList(first: Int, after: Int): [Chat_sessions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "chatbot_id", "created_at", "guest_id", "id" FROM "chat_sessions" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  chat_sessionsUsingChat_sessions_chatbot_id_fkey(id: Int!): [Chat_sessions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "chatbot_id", "created_at", "guest_id", "id" FROM "chat_sessions" WHERE "chatbot_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  chat_sessionsUsingChat_sessions_guest_id_fkey(id: Int!): [Chat_sessions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "chatbot_id", "created_at", "guest_id", "id" FROM "chat_sessions" WHERE "guest_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  chat_sessionsUsingMessages_chat_session_id_fkey(
+    chat_session_id: Int!
+  ): Chat_sessions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "chatbot_id", "created_at", "guest_id", "id" FROM "chat_sessions" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Chatbot_characteristics' "
+  chatbot_characteristics(id: Int!): Chatbot_characteristics
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chatbot_characteristics"
+      configuration: "postgresql_config"
+    )
+  chatbot_characteristicsList: [Chatbot_characteristics]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chatbot_characteristics"
+      configuration: "postgresql_config"
+    )
+  chatbot_characteristicsPaginatedList(
+    first: Int
+    after: Int
+  ): [Chatbot_characteristics]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "chatbot_id", "content", "created_at", "id" FROM "chatbot_characteristics" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  chatbot_characteristicsUsingChatbot_characteristics_chatbot_id_fkey(
+    id: Int!
+  ): [Chatbot_characteristics]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "chatbot_id", "content", "created_at", "id" FROM "chatbot_characteristics" WHERE "chatbot_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Chatbots' "
+  chatbots(id: Int!): Chatbots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chatbots"
+      configuration: "postgresql_config"
+    )
+  chatbotsList: [Chatbots]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chatbots"
+      configuration: "postgresql_config"
+    )
+  chatbotsPaginatedList(first: Int, after: Int): [Chatbots]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "clerk_user_id", "created_at", "id", "name" FROM "chatbots" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  chatbotsUsingChat_sessions_chatbot_id_fkey(chatbot_id: Int!): Chatbots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "clerk_user_id", "created_at", "id", "name" FROM "chatbots" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  chatbotsUsingChatbot_characteristics_chatbot_id_fkey(
+    chatbot_id: Int!
+  ): Chatbots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "clerk_user_id", "created_at", "id", "name" FROM "chatbots" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Guests' "
+  guests(id: Int!): Guests
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "guests"
+      configuration: "postgresql_config"
+    )
+  guestsList: [Guests]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "guests"
+      configuration: "postgresql_config"
+    )
+  guestsPaginatedList(first: Int, after: Int): [Guests]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "created_at", "email", "id", "name" FROM "guests" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  guestsUsingChat_sessions_guest_id_fkey(guest_id: Int!): Guests
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "created_at", "email", "id", "name" FROM "guests" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Messages' "
+  messages(id: Int!): Messages
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "messages"
+      configuration: "postgresql_config"
+    )
+  messagesList: [Messages]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "messages"
+      configuration: "postgresql_config"
+    )
+  messagesPaginatedList(first: Int, after: Int): [Messages]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "chat_session_id", "content", "created_at", "id", "sender" FROM "messages" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  messagesUsingMessages_chat_session_id_fkey(id: Int!): [Messages]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "chat_session_id", "content", "created_at", "id", "sender" FROM "messages" WHERE "chat_session_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Chat_sessions' "
+  deleteChat_sessions(id: Int!): Chat_sessions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chat_sessions"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertChat_sessions(
+    created_at: DateTime!
+    guest_id: Int
+    chatbot_id: Int
+  ): Chat_sessions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chat_sessions"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateChat_sessions(
+    id: Int!
+    chatbot_id: Int
+    created_at: DateTime
+    guest_id: Int
+  ): Chat_sessions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "chat_sessions" SET
+        "chatbot_id" = COALESCE($2, "chatbot_id"),
+        "created_at" = COALESCE($3, "created_at"),
+        "guest_id" = COALESCE($4, "guest_id")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Chatbot_characteristics' "
+  deleteChatbot_characteristics(id: Int!): Chatbot_characteristics
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chatbot_characteristics"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertChatbot_characteristics(
+    created_at: DateTime!
+    content: String!
+    chatbot_id: Int
+  ): Chatbot_characteristics
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chatbot_characteristics"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateChatbot_characteristics(
+    id: Int!
+    chatbot_id: Int
+    content: String
+    created_at: DateTime
+  ): Chatbot_characteristics
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "chatbot_characteristics" SET
+        "chatbot_id" = COALESCE($2, "chatbot_id"),
+        "content" = COALESCE($3, "content"),
+        "created_at" = COALESCE($4, "created_at")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Chatbots' "
+  deleteChatbots(id: Int!): Chatbots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chatbots"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertChatbots(
+    created_at: DateTime!
+    name: String!
+    clerk_user_id: String!
+  ): Chatbots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "chatbots"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateChatbots(
+    id: Int!
+    clerk_user_id: String
+    created_at: DateTime
+    name: String
+  ): Chatbots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "chatbots" SET
+        "clerk_user_id" = COALESCE($2, "clerk_user_id"),
+        "created_at" = COALESCE($3, "created_at"),
+        "name" = COALESCE($4, "name")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Guests' "
+  deleteGuests(id: Int!): Guests
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "guests"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertGuests(created_at: DateTime!, email: String, name: String): Guests
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "guests"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateGuests(
+    id: Int!
+    created_at: DateTime
+    email: String
+    name: String
+  ): Guests
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "guests" SET
+        "created_at" = COALESCE($2, "created_at"),
+        "email" = COALESCE($3, "email"),
+        "name" = COALESCE($4, "name")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Messages' "
+  deleteMessages(id: Int!): Messages
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "messages"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertMessages(
+    chat_session_id: Int
+    content: String!
+    sender: String!
+    created_at: DateTime!
+  ): Messages
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "messages"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateMessages(
+    id: Int!
+    chat_session_id: Int
+    content: String
+    created_at: DateTime
+    sender: String
+  ): Messages
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "messages" SET
+        "chat_session_id" = COALESCE($2, "chat_session_id"),
+        "content" = COALESCE($3, "content"),
+        "created_at" = COALESCE($4, "created_at"),
+        "sender" = COALESCE($5, "sender")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+}

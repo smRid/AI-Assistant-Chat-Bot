@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input"
 import { BASE_URL } from "@/graphql/apolloClient";
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { redirect, useParams } from "next/navigation"
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
@@ -13,7 +13,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_CHATBOT_BY_ID } from "@/graphql/queries/queries";
 import { GetChatbotByIdResponse, GetChatbotByIdVariables } from "@/types/types";
 import Characteristic from "@/components/Characteristic";
-import { ADD_CHARACTERISTIC, DELETE_CHATBOT } from "@/graphql/mutations/mutations";
+import { ADD_CHARACTERISTIC, DELETE_CHATBOT, UPDATE_CHATBOT } from "@/graphql/mutations/mutations";
 
 
 // function EditChatbot({ params: { id } }: { params: { id: string } }) {
@@ -33,6 +33,10 @@ function EditChatbot() {
   const [addCharacteristic] = useMutation(ADD_CHARACTERISTIC, {
     refetchQueries: ["GetChatbotById"],
   });
+
+  const [updateChatebot] = useMutation(UPDATE_CHATBOT,{
+    refetchQueries: ["GetChatbotById"],
+  })
 
   const { data, loading, error} = useQuery<
     GetChatbotByIdResponse, 
@@ -73,6 +77,25 @@ function EditChatbot() {
       }
     };
 
+  const handleUpdateChatbot = async(e: FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    try {
+      const promise = updateChatebot({
+        variables:{
+          id,
+          name:chatbotName
+        }
+      })
+      toast.promise(promise,{
+        loading: "Updating...",
+        success: "Chatbot name Successfully updated",
+        error: "Failed to upadte chatbot",
+      })
+    } catch (error) {
+      console.log("Failed to update chatbot", error);
+    }
+  }
+
   const handleDelete = async (id: string) => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this chatbot?"
@@ -103,7 +126,7 @@ function EditChatbot() {
   if (!data?.chatbots) return redirect("/view-chatbots");
 
   return <div className="px-0 md:p-10">
-    <div className="md:sticky lg:sticky md:top-0 z-50 sm:max-w-sm ml-auto space-y-2 md:border p-5 rounded-b-lg md:rounded-lg bg-[#2997E1]">
+    <div className="md:sticky md:top-0 z-50 sm:max-w-sm ml-auto space-y-2 md:border p-5 rounded-b-lg md:rounded-lg bg-[#2997E1]">
       <h2 className="text-white text-sm font-bold">Link to Chat</h2>
       <p className="text-sm italic text-white">
         Share this link with your customers to start a chat with your chatbot.
@@ -136,7 +159,7 @@ function EditChatbot() {
             <Avatar seed={chatbotName}/>
 
             <form 
-            // onSubmit={handleUpdate}
+            onSubmit={handleUpdateChatbot}
             className="flex flex-1 space-x-2 items-center"
             
             >

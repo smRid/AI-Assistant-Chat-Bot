@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
 import { serverClient } from "@/lib/server/serverClient";
-import { gql } from '@apollo/client';
+import { NextRequest, NextResponse } from "next/server";
+import { gql } from "@apollo/client";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,11 +8,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization"
 };
 
+
 export async function POST(request: NextRequest) {
     const { query, variables } = await request.json();
-
-    console.log("DEBUG 1", query);
-    console.log("DEBUG 2", variables);
 
     try {
         let result;
@@ -21,34 +19,41 @@ export async function POST(request: NextRequest) {
             //Handle mutation
             result = await serverClient.mutate({
                 mutation: gql`
-                ${query}`,
+                ${query}
+                `,
                 variables,
-        });
-        }
-        else {
+            })
+        } else {
             //Handle query
             result = await serverClient.query({
                 query: gql`
-                ${query}`,
+                ${query}
+                `,
                 variables,
             });
-        }
+        };
 
         const data = result.data;
         return NextResponse.json(
             {
-            data,
-            }, 
-            {
+                data,  
+            }, {
             headers: corsHeaders,
-            }
-        );
+        });
 
 
     } catch (error) {
-        console.log(error);
-        return NextResponse.json(error,{
-                status:500
-            });
-        }
+        return NextResponse.json(
+            {
+                data: null,
+                errors: [
+                    error instanceof Error ? { message: error.message } : { message: String(error) }
+                ]
+            },
+            {
+                status: 200, // GraphQL spec: errors are returned with 200 status
+                headers: corsHeaders,
+            }
+        );
+    }
 }

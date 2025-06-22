@@ -1,8 +1,7 @@
 export default function Home() {
   return (
-    <div className="">
-      <h1>AI ASSISTANT APP</h1>
-    </div>
+    <main className="">
+      <h1>Lets build AI Chat bot</h1>
+    </main>
   );
 }
- 

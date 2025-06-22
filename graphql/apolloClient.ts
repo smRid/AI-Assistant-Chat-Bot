@@ -11,7 +11,7 @@ export const BASE_URL =
     : "http://localhost:3000";
 
 const httpsLink = createHttpLink({ 
-    uri: `${BASE_URL}api/graphql`, //Point to the new API route
+    uri: `${BASE_URL}/api/graphql`, //Point to the new API route
 });
 
 

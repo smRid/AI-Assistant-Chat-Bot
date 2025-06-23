@@ -28,7 +28,8 @@
 - 🧠 **AI Chatbot Sessions**: Real-time chat interface with dynamic session creation  
 - 🔐 **Authentication** with Clerk, including admin and guest roles  
 - 🧑‍💼 **Admin Tools**: Review and manage all chat sessions  
-- 🧭 **Role-Based Navigation** based on user type (guest/admin)  
+- 🧭 **Role-Based Navigation** based on user type (guest/admin)
+- 🧬 **OpenAI-Powered**: Generates intelligent, human-like responses using OpenAI models.
 - 🗂️ **GraphQL API** powered by Apollo Client and Apollo Server  
 - 🎨 **Modern UI** with Tailwind CSS and React components  
 - ⚙️ **Secure CORS Handling** in both code and Vercel config  

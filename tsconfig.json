@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/graphql, "app/api/send-message/rout, "app/(guest)/chatbot/[id]/page., "app/(guest)/login/page.js"js"e.js, "app/(admin)/create-chatbot, "app/(admin)/edit-chatbot/[id]/page.j, "app/(admin)/review-sessions/[id]/page.j, "app/(admin)/review-sessions/page.jsx"sx"sx, "app/(admin)/view-chatbots/page.jsx""/, "app/(admin)/layout.jsx"page.jsx""/r, "app/(admin)/loading.jsx, "app/(admin)/page.jsx""ou, "components/ApolloProv, "components/Avatar.jsx"ider.jsx, "components/Characteris, "components/Header.jsx"tic.jsx", "components/Messages.js, "components/Sidebar.jsx"x, "graphql/mutations/mutat, "graphql/queries/queries.js"ions, "graphql/apolloClient.js".js, "lib/server/serverClient., "lib/constants.js"js""""te.j, "lib/startNewChat., "lib/utils.js"js"s", , "types/types.j, "components/ui/a, "components/ui/button.jsx"cco, "components/ui/dialog.jsx", "components/ui/form.jsx"rd, "components/ui/input.jsx, "components/ui/label.jsx""ion.jsx"s""app/layout.jsx"],
   "exclude": ["node_modules"]
 }

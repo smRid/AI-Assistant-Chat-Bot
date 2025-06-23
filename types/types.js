@@ -49,3 +49,35 @@ export type GetChatbotsByUserData = {
 export interface GetChatbotsByUserDataVariables {
     clerk_user_id: string;
 }
+
+export type GetUserChatbotsResponse = {
+  chatbotsList: Chatbot[];
+};
+export interface GetUserChatbotsVariables {
+    userId: string;
+}
+
+
+export interface GetChatSessionMessagesResponse {
+    chat_sessions: {
+        id: number;
+        created_at: string;
+        messages: Message[];
+        chatbots: {
+            name: string;
+        }
+        guests: {
+            name: string;
+            email: string;
+        }
+    }
+
+
+}
+
+export interface MessageBYChatSessionIdResponse {
+    chat_sessions: ChatSession
+}
+export interface MessageBYChatSessionIdVariables {
+    chat_session_id: number;
+}

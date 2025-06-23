@@ -1,16 +1,21 @@
-# 🤖 Aidly Bot – Customizable AI Chatbot Platform
+# 🤖 Aidly Bot – Customizable AI Chatbot
 
-**Aidly Bot** is a modern, customizable AI assistant platform built with Next.js 15, designed to power intelligent conversations between users and customers through purpose-specific chatbots. Whether you're creating an internal support agent, a domain-specific assistant, or an educational chatbot, Aidly Bot offers the flexibility and structure to manage it all.
+**Aidly Bot** is a modern, customizable AI assistant platform built with Next.js 15, designed to facilitate intelligent, human-like conversations between users and customers through purpose-driven chatbots. It empowers businesses to deploy scalable assistants that can handle inquiries, resolve issues, guide users, and deliver real-time support 24/7. Whether you're building an internal support agent, a domain-specific assistant, an educational tutor, or a customer-facing helpdesk, Aidly Bot provides the flexibility, reliability, and structure to manage it all with ease.
 
 
 ---
 
 ## 🖼️ Preview
 
-![Aidly Bot Preview](./public/preview-1.png)  
-![Aidly Bot Preview](./public/preview-2.png)  
-![Aidly Bot Preview](./public/preview-3.png)  
-![Aidly Bot Preview](./public/preview-4.png)  
+<p align="center">
+  <img src="./public/preview-1.png" alt="Aidly Bot Preview" width="600" />
+  <br />
+  <img src="./public/preview-2.png" alt="Aidly Bot Preview" width="600" />
+  <br />
+  <img src="./public/preview-3.png" alt="Aidly Bot Preview" width="600" />
+  <br />
+  <img src="./public/preview-4.png" alt="Aidly Bot Preview" width="600" />
+</p>
 
 ---
 
@@ -28,8 +33,7 @@
 - 🎨 **Modern UI** with Tailwind CSS and React components  
 - ⚙️ **Secure CORS Handling** in both code and Vercel config  
 - 🕒 **Time Formatting** with `react-time-ago`  
-- 🛠️ **Type-Safe Error Handling** with full TypeScript support  
-- 🌍 **Locale Setup** for consistent time formatting
+
 
 ---
 
@@ -47,7 +51,31 @@
 
 - [Apollo Server](https://www.apollographql.com/docs/apollo-server/) – GraphQL backend  
 - [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/router-handlers) – Edge Functions for APIs  
-- [PostgreSQL](https://www.postgresql.org/) *(assumed via schema and SQL seed file)*  
+- [PostgreSQL](https://www.postgresql.org/) - Database schema & management
 - [Vercel](https://vercel.com) – Hosting platform with Edge Functions and Env Variables  
 
 ---
+
+## 🚀 Key Features
+
+- ✅ **Dynamic Chatbot Sessions**  
+  Create, review, and manage real-time chatbot conversations.
+
+- 🔐 **Admin & Guest Access**  
+  Secure role-based access with Clerk, including separate dashboards.
+
+- 🎯 **GraphQL-Powered API**  
+  Centralized data management using Apollo Server & Client.
+
+- 🧑‍🎨 **Modern, Responsive UI**  
+  Built with Tailwind CSS and fully responsive design principles.
+
+- 🛡️ **Advanced CORS Support**  
+  Fully compliant CORS handling for secure, cross-origin communication.
+
+---
+
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).

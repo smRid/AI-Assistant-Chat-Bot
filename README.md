@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 Aidly Bot – Customizable AI Chatbot Platform
 
-## Getting Started
+**Aidly Bot** is a modern, customizable AI assistant platform built with Next.js 15, designed to power intelligent conversations between users and customers through purpose-specific chatbots. Whether you're creating an internal support agent, a domain-specific assistant, or an educational chatbot, Aidly Bot offers the flexibility and structure to manage it all.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🖼️ Preview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![Aidly Bot Preview](./public/preview-1.png)  
+![Aidly Bot Preview](./public/preview-2.png)  
+![Aidly Bot Preview](./public/preview-3.png)  
+![Aidly Bot Preview](./public/preview-4.png)  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔗 Live Demo : [View Live Demo](https://aidlybot.vercel.app)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🧠 **AI Chatbot Sessions**: Real-time chat interface with dynamic session creation  
+- 🔐 **Authentication** with Clerk, including admin and guest roles  
+- 🧑‍💼 **Admin Tools**: Review and manage all chat sessions  
+- 🧭 **Role-Based Navigation** based on user type (guest/admin)  
+- 🗂️ **GraphQL API** powered by Apollo Client and Apollo Server  
+- 🎨 **Modern UI** with Tailwind CSS and React components  
+- ⚙️ **Secure CORS Handling** in both code and Vercel config  
+- 🕒 **Time Formatting** with `react-time-ago`  
+- 🛠️ **Type-Safe Error Handling** with full TypeScript support  
+- 🌍 **Locale Setup** for consistent time formatting
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧩 Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🧑‍💻 Client
+
+- [Next.js 15](https://nextjs.org/) – App Router based structure  
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS  
+- [Apollo Client](https://www.apollographql.com/docs/react/) – State management for GraphQL  
+- [Clerk](https://clerk.dev/) – Authentication & session management  
+- [React Time Ago](https://github.com/catamphetamine/react-time-ago) – Human-readable time formatting  
+
+### ⚙️ Server
+
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/) – GraphQL backend  
+- [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/router-handlers) – Edge Functions for APIs  
+- [PostgreSQL](https://www.postgresql.org/) *(assumed via schema and SQL seed file)*  
+- [Vercel](https://vercel.com) – Hosting platform with Edge Functions and Env Variables  
+
+---

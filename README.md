@@ -76,6 +76,66 @@
 
 ---
 
+## <a name="getting-started">🚀 Getting Started</a>
+
+To get started follow these steps:
+
+## Cloning the Repository
+
+Using CLI
+
+```bash
+git clone https://github.com/smRid/AI-Assistant-Chat-Bot.git
+```
+
+**\*\*_Ensure you have installed [Git](https://git-scm.com) on your machine._**
+
+or using GitHub:
+
+-   Go to the project [repository](https://github.com/smRid/AI-Assistant-Chat-Bot) on my GitHub page
+-   Click on the green button on the top 👆
+-   Click Download ZIP
+
+
+### ⚙️ Installation
+
+## Setup .env file
+```bash
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_GRAPHQL_ENDPOINT=
+GRAPHQL_TOKEN=
+OPENAI_API_KEY=
+
+```
+
+Install the project dependencies using npm:
+
+### Build the app
+
+```bash
+npm install
+```
+
+**\*\*_Ensure you have installed [NodeJS](https://nodejs.org/en) on your machine._**
+
+### Generate the Prisma client and apply initial migrations
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name init
+```
+### Start the app
+
+```bash
+npm run dev
+```
+
+**\*\*_Navigate to http://localhost:3000 in your browser to access the local development server._**
+
+---
+
 
 ## 📄 License
 
